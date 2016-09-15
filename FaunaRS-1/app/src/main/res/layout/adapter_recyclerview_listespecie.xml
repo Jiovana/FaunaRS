@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview_adapter"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:layout_margin="6dp"
+    android:clickable="true"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="6dp"
+    android:foreground="?attr/selectableItemBackground">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- Foto do animal -->
+
+        <!-- Barra de progresso enquanto carrega a foto -->
+        <ProgressBar
+            android:id="@+id/progressbar_cardviewadapter"
+            style="@android:style/Widget.ProgressBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center|center_vertical"
+            android:layout_marginRight="6dp"
+            android:gravity="center|center_vertical"
+            android:visibility="invisible" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="176dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="left|center">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/imgP_recycler"
+                android:contentDescription='@string/foto_pequena'
+                android:src="@drawable/foto_sombra"/>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="176dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="right|center_vertical"
+            android:weightSum="1">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Nome especie"
+                android:id="@+id/txtNome_recycler"
+                android:layout_weight="0.18"
+                android:layout_gravity="top|center_horizontal"
+                android:textAlignment="center" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@color/abc_secondary_text_material_light"
+                android:text="Nome cientifico"
+                android:id="@+id/txtNomeC_recycler"
+                android:layout_weight="0.19"
+                android:textAlignment="center"
+                android:layout_gravity="top|center_horizontal" />
+        </LinearLayout>
+
+    </FrameLayout>
+
+</android.support.v7.widget.CardView>

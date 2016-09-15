@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:id="@+id/main_layout">
+
+    <include layout="@layout/content_main" />
+
+
+    <ImageView
+        android:layout_width="285dp"
+        android:layout_height="285dp"
+        android:id="@+id/img_main"
+        android:src="@drawable/small"
+        android:layout_gravity="center_horizontal|top"
+        />
+
+    <LinearLayout
+        android:id="@+id/layout_main_button"
+        android:orientation="vertical"
+        android:layout_width="245dp"
+        android:layout_height="187dp"
+        android:layout_gravity="center_horizontal|bottom">
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Identificar"
+            android:id="@+id/btnIdentificar"
+            android:onClick="onClickIdentificar"/>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pesquisar"
+            android:id="@+id/btnPesquisar"
+            android:onClick="onClickPesquisar"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
+</FrameLayout>
+

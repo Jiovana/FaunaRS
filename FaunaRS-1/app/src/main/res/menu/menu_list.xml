@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/menuitem_pesquisar"
+        app:actionViewClass="android.widget.SearchView"
+        app:icon="@drawable/ic_search_white_24dp"
+        app:showAsAction="always"
+        android:title="@string/menu_item_pesquisar"/>
+
+    <group android:id="@+id/menu_actionbar" >
+        <item
+            android:id="@+id/menuitem_creditos"
+            android:icon="@drawable/ic_action_new"
+            app:showAsAction="ifRoom|withText"
+            android:title="@string/menu_item_creditos" />
+        <item
+            android:id="@+id/menuitem_som"
+            android:icon="@drawable/ic_sound"
+            app:showAsAction="ifRoom|withText"
+            android:title="@string/menu_item_som"  />
+        <item
+            android:id="@+id/menuitem_sair"
+            android:icon="@drawable/ic_action_cancel"
+            app:showAsAction="ifRoom|withText"
+            android:title="@string/menu_item_sair"  />
+    </group>
+
+</menu>

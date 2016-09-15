@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">FaunaRS</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_item_som">Som On/Off</string>
+    <string name="menu_item_voltar">Sair</string>
+    <string name="menu_item_creditos">Creditos</string>
+    <string name="menu_item_sair">Sair</string>
+    <string name="menu_item_pesquisar">Pesquisar</string>
+    <string name="identificar">Identificar</string>
+    <string name="foto_pequena">Foto pequena</string>
+    <string name="nome_especie">Nome da espécie</string>
+    <string name="nome_cientifico">Nome científico</string>
+    <string name="title_search_fragment">Pesquisar</string>
+    <string name="title_identify_fragment">Identificar</string>
+    <string name="title_list_fragment">Especies</string>
+    <string name="title_especie_fragment">Nome_especie</string>
+    <string name="title_result_fragment">Resultado</string>
+    <string name="title_main">Fauna RS</string>
+    <string name="title_gallery">Galeria</string>
+
+</resources>
