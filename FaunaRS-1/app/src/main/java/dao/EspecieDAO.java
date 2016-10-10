@@ -1,109 +1,131 @@
 package dao;
 
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+import android.database.Cursor;
+import android.os.AsyncTask;
+import android.util.Log;
 
-import static android.database.sqlite.SQLiteDatabase.openOrCreateDatabase;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.Especie;
+
+
 
 /**
- * Created by gomes on 22/04/2016.
+ * Created by gomes on 28/09/2016.
  */
-public class EspecieDAO {
-    //atributos e/ou constantes da classe
-    private static EspecieDAO especieDAO; //objeto da própria classe
-    private final Context context; //o contexto da aplicação
-    private DBHelper myHelper; //objeto que auxilia na criação e/ou upgrade do banco de dados
-    private SQLiteDatabase database; //objeto de conexão com o banco de dados
+public class EspecieDAO extends SQLiteOpenHelper {
 
+    private static String TAG = "speciedao";
+    private static String NAME = "animais.db";
+    private static int VERSION = 1;
+    private static EspecieDAO especieDAO = null;
 
-    /**
-     * Método construtor privado para implementar o padrão de projeto Singleton.
-     *
-     * @param context
-     */
-    private EspecieDAO(Context context) {
-        this.context = context; //recebe o contexto da Activity que o chamou
+    private EspecieDAO(Context context){
+        super(context, NAME, null, VERSION);
+        getWritableDatabase();
     }
-    /**
-     * Método responsável por obter a instância do objeto ou contruí-lo, se este ainda não tiver sido contruído.
-     *
-     * @param context
-     * @return livroDAO
-     */
-    public static EspecieDAO getInstance(Context context) {
-        if (especieDAO == null) {
-            especieDAO = new EspecieDAO(context);
-            return especieDAO;
+
+    public static EspecieDAO getInstance (Context context){
+        if (especieDAO == null){
+            return especieDAO = new EspecieDAO(context);
         }
         return especieDAO;
     }
-    /**
-     * Método responsável por abrir uma conexão com o banco de dados.
-     */
-    public void open() {
-        myHelper = DBHelper.getInstance(context); //instância um objeto que auxilia na criação e/ou atualização
-        database = myHelper.getWritableDatabase(); //devolve uma conexão para o banco de dados
+
+    @Override
+    public void onCreate(SQLiteDatabase sqLiteDatabase){
+        String sql = "CREATE TABLE IF NOT EXISTS ESPECIE " +
+                "(_ESP_ID INTEGER PRIMARY KEY, " +
+                "ESP_NOME VARCHAR(100), " +
+                "ESP_LOCAL TEXT, " +
+                "ESP_CARACT TEXT, " +
+                "ESP_HABITOS TEXT, " +
+                "ESP_CARAC3 VARCHAR(50), " +
+                "ESP_CARAC2 VARCHAR(50), " +
+                "ESP_FOTOG MEDIUMBLOB, " +
+                "ESP_FOTOP BLOB, " +
+                "ESP_FILO VARCHAR(50), " +
+                "ESP_ORDEM VARCHAR(50), " +
+                "ESP_CLASSE VARCHAR(50), " +
+                "ESP_GENERO VARCHAR(50), " +
+                "ESP_ESP VARCHAR(100), " +
+                "ESP_CARAC4 VARCHAR(50), " +
+                "ESP_CARAC5 VARCHAR(50), " +
+                "ESP_CARAC6 VARCHAR(50));";
+        Log.d(TAG, "Criando a tabela ESPECIE. Aguarde...");
+        sqLiteDatabase.execSQL(sql);
+        Log.d(TAG,"Tabela ESPECIE criada com sucesso");
+        new Task().execute();
+    }
+    @Override
+    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+
+    }
+    public List<Especie> getByFilo(String filo){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            return toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_FILO = '" + filo + "'",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByNome(String filo, String nome){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            return toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_FILO = '" + filo + "' AND ESP_NOME LIKE '" +
+                    nome + "%'",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
     }
 
-    /**
-     * Método responsável por liberar a conexão com o banco de dados.
-     */
-    public void close() {
-        database.close(); //libera o recurso
-    }
+    private List<Especie> toList(Cursor c){
+        List<Especie> especies = new ArrayList<>();
+        if(c.moveToFirst()){
+            do{
+                Especie especie = new Especie();
+                especie.id = c.getLong(c.getColumnIndex("_ESP_ID"));
+                especie.nome = c.getString(c.getColumnIndex("ESP_NOME"));
+                especie.caracteristicas = c.getString(c.getColumnIndex("ESP_CARACT"));
+                especie.habitos = c.getString(c.getColumnIndex("ESP_HABITOS"));
+                especie.localizacao = c.getString(c.getColumnIndex("ESP_LOCAL"));
+                especie.caracter2 = c.getString(c.getColumnIndex("ESP_CARAC2"));
+                especie.caracter3 = c.getString(c.getColumnIndex("ESP_CARAC3"));
+                especie.caracter4 = c.getString(c.getColumnIndex("ESP_CARAC4"));
+                especie.caracter5 = c.getString(c.getColumnIndex("ESP_CARAC5"));
+                especie.caracter6 = c.getString(c.getColumnIndex("ESP_CARAC6"));
+                especie.filo = c.getString(c.getColumnIndex("ESP_FILO"));
+                especie.ordem = c.getString(c.getColumnIndex("ESP_ORDEM"));
+                especie.classe = c.getString(c.getColumnIndex("ESP_CLASSE"));
+                especie.genero = c.getString(c.getColumnIndex("ESP_GENERO"));
+                especie.especie = c.getString(c.getColumnIndex("ESP_ESP"));
+                especie.img1 = c.getBlob(c.getColumnIndex("ESP_FOTOP"));
+                especie.img2 = c.getBlob(c.getColumnIndex("ESP_FOTOG"));
 
+                especies.add(especie);
+            }while (c.moveToNext());
+        }
+        return especies;
+    }
+    private class Task extends AsyncTask<Void, Void, Boolean>{
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            return popularTabelaEspecie();
+        }
 
-
-    /**
-     * MétodoS para obter a lista de ESPECIES.
-     *
-     * @return Cursor
-     */
-    public Cursor getListaPeixe() {
-        //retorna o Cursor para os registros contidos no banco de dados
-        return database.rawQuery("SELECT  * FROM " + Contract.Especie.TABELA_ESPECIE + "WHERE ESP_FILO = 'PEIXES' ORDER BY " +Contract.Especie.COLUNA_NOME, null);
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+            if(aBoolean){
+                Log.d(TAG, "Tabela ESPECIE populada com sucesso.");
+            }
+        }
     }
-    public Cursor getListaAnfibio() {
-        //retorna o Cursor para os registros contidos no banco de dados
-        return database.rawQuery("SELECT  * FROM " + Contract.Especie.TABELA_ESPECIE + "WHERE ESP_FILO = 'ANFÍBIOS' ORDER BY " +Contract.Especie.COLUNA_NOME, null);
-    }
-    public Cursor getListaReptil() {
-        //retorna o Cursor para os registros contidos no banco de dados
-        return database.rawQuery("SELECT  * FROM " + Contract.Especie.TABELA_ESPECIE + "WHERE ESP_FILO = 'REPTILIA' ORDER BY "+Contract.Especie.COLUNA_NOME, null);
-    }
-    public Cursor getListaAve() {
-        //retorna o Cursor para os registros contidos no banco de dados
-        return database.rawQuery("SELECT  * FROM " + Contract.Especie.TABELA_ESPECIE + "WHERE ESP_FILO = 'AVES' ORDER BY "+Contract.Especie.COLUNA_NOME, null);
-    }
-    public Cursor getListaMamifero() {
-        //retorna o Cursor para os registros contidos no banco de dados
-        return database.rawQuery("SELECT  * FROM " + Contract.Especie.TABELA_ESPECIE + "WHERE ESP_FILO = 'MAMMALIA' ORDER BY "+Contract.Especie.COLUNA_NOME, null);
-    }
-
-    /**
-     *  Método para obter a lista de contatos, baseado no criterio "nome"
-     * @param nome
-     * @return
-     */
-    public Cursor getListaByNomePeixe(String nome) {
-        //retorna o Cursor para os registros contidos no banco de dados baseado no criterio "nome"
-       return database.rawQuery("SELECT  * FROM " + Contract.Especie.TABELA_ESPECIE + " WHERE ESP_FILO = 'PEIXES' AND ESP_NOME LIKE '" + nome + "%'", null);
-    }
-    public Cursor getListaByNomeAnfibio(String nome) {
-        //retorna o Cursor para os registros contidos no banco de dados baseado no criterio "nome"
-        return database.rawQuery("SELECT  * FROM " + Contract.Especie.TABELA_ESPECIE + " WHERE ESP_FILO = 'ANFÍBIOS' AND ESP_NOME LIKE '" + nome + "%'", null);
-    }
-    public Cursor getListaByNomeReptil(String nome) {
-        //retorna o Cursor para os registros contidos no banco de dados baseado no criterio "nome"
-        return database.rawQuery("SELECT  * FROM " + Contract.Especie.TABELA_ESPECIE + " WHERE ESP_FILO = 'REPTILIA' AND ESP_NOME LIKE '" + nome + "%'", null);
-    }
-    public Cursor getListaByNomeAve(String nome) {
-        //retorna o Cursor para os registros contidos no banco de dados baseado no criterio "nome"
-        return database.rawQuery("SELECT  * FROM " + Contract.Especie.TABELA_ESPECIE + " WHERE ESP_FILO = 'AVES' AND ESP_NOME LIKE '" + nome + "%'", null);
-    }
-    public Cursor getListaByNomeMamifero(String nome) {
-        //retorna o Cursor para os registros contidos no banco de dados baseado no criterio "nome"
-        return database.rawQuery("SELECT  * FROM " + Contract.Especie.TABELA_ESPECIE + " WHERE ESP_FILO = 'MAMMALIA' AND ESP_NOME LIKE '" + nome + "%'", null);
+    private boolean popularTabelaEspecie(){
+        return false;
     }
 }

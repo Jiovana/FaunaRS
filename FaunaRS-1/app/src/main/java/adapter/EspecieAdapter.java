@@ -57,11 +57,11 @@ public class EspecieAdapter extends RecyclerView.Adapter<EspecieAdapter.Especies
         // Atualiza a view
         Especie e = especies.get(position);
 
-        holder.txtNome.setText(e.getNome());
-        holder.txtNomeC.setText(e.getEspecie());
+        holder.txtNome.setText(e.nome);
+        holder.txtNomeC.setText(e.especie);
         holder.progress.setVisibility(View.VISIBLE);
 
-        Picasso.with(context).load(String.valueOf(e.getImg2())).fit().into(holder.imgP, new Callback() { //ajuda professor ver o tipo de imagem pra puxar do banco, a variavel tá em bytes
+        Picasso.with(context).load(String.valueOf(e.img2)).fit().into(holder.imgP, new Callback() { //ajuda professor ver o tipo de imagem pra puxar do banco, a variavel tá em bytes
             @Override
             public void onSuccess() {
                 holder.progress.setVisibility(View.GONE);

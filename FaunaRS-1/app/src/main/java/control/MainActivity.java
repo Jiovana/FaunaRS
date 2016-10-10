@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
     private MediaPlayer player;
     private LinearLayout layout;
     private View view;
+    public String filo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

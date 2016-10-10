@@ -1,28 +1,14 @@
 package control;
 
-import android.app.ActionBar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.RadioButton;
 
 import com.example.gomes.faunars_1.R;
-
-import java.util.List;
 
 import dao.EspecieDAO;
 import model.Especie;
@@ -38,21 +24,61 @@ public class SearchFragment extends Fragment {
     private Button btnAv;
     private Button btnM;
     private ListFragment listFragment;
+    private SearchFragment searchFragment;
     private EspecieDAO especieDAO;
     private Especie especie;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        especieDAO = EspecieDAO.getInstance(getContext());
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_search_fragment);  //um título para a janela
-        especieDAO = EspecieDAO.getInstance(getContext());
-        especieDAO.open();
+        final MainActivity mainActivity = (MainActivity)getActivity();
 
+        btnP = (Button) view.findViewById(R.id.btnP);
+        btnP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.filo = ("PEIXES");
+                replaceFragment();
+            }
+        });
+        btnAn = (Button) view.findViewById(R.id.btnAn);
+        btnAn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.filo = ("ANFÍBIOS");
+                replaceFragment();
+            }
+        });
+        btnR = (Button) view.findViewById(R.id.btnR);
+        btnR.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.filo = ("REPTILIA");
+                replaceFragment();
+            }
+        });
+        btnAv = (Button) view.findViewById(R.id.btnAv);
+        btnAv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.filo = ("AVES");
+                replaceFragment();
+            }
+        });
+        btnM = (Button) view.findViewById(R.id.btnM);
+        btnM.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mainActivity.filo = ("MAMMALIA");
+                replaceFragment();
+            }
+        });
         return view;
     }
 
@@ -72,31 +98,16 @@ public class SearchFragment extends Fragment {
 
     }
 
-    public void onClickPeixes() {
-
-        replaceFragment();
-    }
-
-    public void onClickAnfibios() {
-        replaceFragment();
-    }
-
-    public void onClickRepteis() {
-        replaceFragment();
-    }
-
-    public void onClickAves() {
-        replaceFragment();
-    }
-
-    public void onClickMamiferos() {
-        replaceFragment();
-    }
-
     private void replaceFragment() {
+       // Bundle args = new Bundle();
+        //args.putString("Filo",searchFragment.getFilo());
+
+        ListFragment listFragment = new ListFragment();
+        //listFragment.setArguments(args);
+
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         //Prepara o fragment que será inflado
-        ListFragment listFragment = new ListFragment();
+
         transaction.replace(R.id.fragment_container, listFragment).addToBackStack(null).commit();
     }
 

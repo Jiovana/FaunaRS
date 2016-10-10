@@ -37,10 +37,13 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="?android:attr/textAppearanceLarge"
                         android:text="Nome da especie"
-                        android:id="@+id/textView4"
+                        android:id="@+id/txt_titulo_esp"
                         android:layout_gravity="center"
                         android:textAlignment="center"
-                        android:textSize="35dp" />
+                        android:textSize="35dp"
+                        android:background="#00ffffff"
+                        android:foreground="#00ffffff"
+                        android:foregroundTint="#00542121" />
                 </FrameLayout>
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
@@ -72,7 +75,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Taxonomia"
-                            android:id="@+id/textView5"
+                            android:id="@+id/txt_tax_esp"
                             android:layout_gravity="center_horizontal"
                             android:textAlignment="center"
                             android:textColor="#000000"
@@ -91,7 +94,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="filo_txt"
-                            android:id="@+id/textView7"
+                            android:id="@+id/txt_filo_esp"
                             android:textSize="15dp" />
 
                         <TextView
@@ -106,7 +109,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="ordem_txt"
-                            android:id="@+id/textView9"
+                            android:id="@+id/txt_ord_esp"
                             android:textSize="15dp" />
 
                         <TextView
@@ -121,7 +124,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="classe_txt"
-                            android:id="@+id/textView11"
+                            android:id="@+id/txt_clas_esp"
                             android:textSize="15dp" />
 
                         <TextView
@@ -136,7 +139,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="genero_txt"
-                            android:id="@+id/textView13"
+                            android:id="@+id/txt_gen_esp"
                             android:textSize="15dp" />
 
                         <TextView
@@ -151,7 +154,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="especie_txt"
-                            android:id="@+id/textView15"
+                            android:id="@+id/txt_esp_esp"
                             android:textSize="15dp" />
                     </LinearLayout>
 
@@ -164,7 +167,7 @@
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/imageView3"
+                            android:id="@+id/img_esp"
                             android:src="@drawable/foto_sombra"
                             android:layout_gravity="left|center_vertical"
                             />
@@ -209,7 +212,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="caracteristicas_txt"
-                            android:id="@+id/textView17"
+                            android:id="@+id/txt_carac_esp"
                             android:textSize="18dp" />
                     </LinearLayout>
                 </FrameLayout>
@@ -252,7 +255,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="habitos_txt"
-                            android:id="@+id/textView19"
+                            android:id="@+id/txt_hab_esp"
                             android:textIsSelectable="true"
                             android:textSize="18dp" />
                     </LinearLayout>
@@ -294,7 +297,7 @@
                             android:layout_height="wrap_content"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="localizacao_txt"
-                            android:id="@+id/textView21"
+                            android:id="@+id/txt_loc_esp"
                             android:textIsSelectable="true"
                             android:textSize="18dp" />
 
@@ -324,7 +327,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Visualizar Galeria"
-                    android:id="@+id/button8"
+                    android:id="@+id/btn_gal_esp"
                     android:layout_gravity="center_horizontal|bottom"
                     android:textSize="18dp"
                     android:textColor="#000000"
