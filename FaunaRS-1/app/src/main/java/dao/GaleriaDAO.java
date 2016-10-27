@@ -5,6 +5,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.AsyncTask;
+import android.util.Base64;
 import android.util.Log;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public class GaleriaDAO extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
         String sql = "CREATE TABLE IF NOT EXISTS GALERIA " +
-                "(_GAL_ID INTEGER PRIMARY KEY, " +
+                "(_id INTEGER PRIMARY KEY, " +
                 "GAL_IMG LONGBLOB, " +
                 "ESP_ID INTEGER, " +
                 "FOREIGN KEY (ESP_ID) REFERENCES ESPECIE(_ESP_ID));";
@@ -50,25 +51,24 @@ public class GaleriaDAO extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
-    public List<Galeria> getByEsp(Long espid){
+    public ArrayList<byte[]> getImagemByEsp(Integer espid){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         try {
-            return toList(sqLiteDatabase.rawQuery("SELECT * FROM GALERIA WHERE ESP_ID = '" + espid + "'",null));
+            Log.d(TAG, "Id da espécie: " + espid);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT GAL_IMG FROM GALERIA WHERE ESP_ID = " +espid ,null).getCount());
+            return toList(sqLiteDatabase.rawQuery("SELECT GAL_IMG FROM GALERIA WHERE ESP_ID = " +espid ,null));
         }finally {
             sqLiteDatabase.close();
         }
     }
 
-    private List<Galeria> toList(Cursor c){
-        List<Galeria> imagens = new ArrayList<>();
+    private ArrayList<byte[]> toList(Cursor c){
+        ArrayList<byte[]> imagens = new ArrayList<>();
         if(c.moveToFirst()){
             do{
-                Galeria imagem  = new Galeria();
-                imagem.gal_id = c.getLong(c.getColumnIndex("_GAL_ID"));
-                imagem.esp_id = c.getLong(c.getColumnIndex("ESP_ID"));
-                imagem.imagem = c.getBlob(c.getColumnIndex("GAL_IMG"));
-
-                imagens.add(imagem);
+                byte[] imageBytes;
+                imageBytes = c.getBlob(c.getColumnIndex("GAL_IMG"));
+                imagens.add(imageBytes);
             }while (c.moveToNext());
         }
         return imagens;

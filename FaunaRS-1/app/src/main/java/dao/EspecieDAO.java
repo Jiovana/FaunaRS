@@ -26,7 +26,7 @@ public class EspecieDAO extends SQLiteOpenHelper {
 
     private EspecieDAO(Context context){
         super(context, NAME, null, VERSION);
-        getWritableDatabase();
+        //getWritableDatabase();
     }
 
     public static EspecieDAO getInstance (Context context){
@@ -39,7 +39,7 @@ public class EspecieDAO extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase){
         String sql = "CREATE TABLE IF NOT EXISTS ESPECIE " +
-                "(_ESP_ID INTEGER PRIMARY KEY, " +
+                "(_id INTEGER PRIMARY KEY, " +
                 "ESP_NOME VARCHAR(100), " +
                 "ESP_LOCAL TEXT, " +
                 "ESP_CARACT TEXT, " +
@@ -51,11 +51,10 @@ public class EspecieDAO extends SQLiteOpenHelper {
                 "ESP_FILO VARCHAR(50), " +
                 "ESP_ORDEM VARCHAR(50), " +
                 "ESP_CLASSE VARCHAR(50), " +
-                "ESP_GENERO VARCHAR(50), " +
+                "ESP_FAMILIA VARCHAR(50), " +
                 "ESP_ESP VARCHAR(100), " +
                 "ESP_CARAC4 VARCHAR(50), " +
-                "ESP_CARAC5 VARCHAR(50), " +
-                "ESP_CARAC6 VARCHAR(50));";
+                "ESP_CARAC5 VARCHAR(50));";
         Log.d(TAG, "Criando a tabela ESPECIE. Aguarde...");
         sqLiteDatabase.execSQL(sql);
         Log.d(TAG,"Tabela ESPECIE criada com sucesso");
@@ -65,30 +64,208 @@ public class EspecieDAO extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
 
     }
-    public List<Especie> getByFilo(String filo){
+    public List<Especie> getByClasse(String classe){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         try {
-            return toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_FILO = '" + filo + "'",null));
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "'",null).getCount());
+            return toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "'",null));
         }finally {
             sqLiteDatabase.close();
         }
     }
-    public List<Especie> getByNome(String filo, String nome){
+    public List<Especie> getByNome(String classe, String nome){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         try {
-            return toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_FILO = '" + filo + "' AND ESP_NOME LIKE '" +
+            return toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_NOME LIKE '" +
                     nome + "%'",null));
         }finally {
             sqLiteDatabase.close();
         }
-    }
 
+    }
+    public List<Especie> getByC2(String classe, String c2){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" +classe+ "' AND ESP_CARAC2 =" +
+                    " '" + c2 + "';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '" + c2 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC3(String classe, String c3){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" +classe+ "' AND ESP_CARAC3 =" +
+                    " '" + c3 + "';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC3 = '" + c3 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC4(String classe, String c4){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" +classe+ "' AND ESP_CARAC4 =" +
+                    " '" + c4 + "';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC4 = '" + c4 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC5(String classe, String c5){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" +classe+ "' AND ESP_CARAC5 =" +
+                    " '" + c5 + "';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC5 = '" + c5 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC2C3(String classe, String c2, String c3){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '"
+                    + c2 + "' AND ESP_CARAC3 = '"+ c3 + "';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '" + c2 +
+                    "' AND ESP_CARAC3 = '"+ c3 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC2C4(String classe, String c2, String c4){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '"
+                    + c2 + "' AND ESP_CARAC4 = '"+ c4 + "';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '" + c2 +
+                    "' AND ESP_CARAC4 = '"+ c4 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC2C5(String classe, String c2, String c5){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '"
+                    + c2 + "' AND ESP_CARAC5 = '"+ c5 + "';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '" + c2 +
+                    "' AND ESP_CARAC5 = '"+ c5 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC3C4(String classe, String c3, String c4){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC3 = '"
+                    + c3 + "' AND ESP_CARAC4 = '"+ c4 + "';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC3 = '" + c3 +
+                    "' AND ESP_CARAC4 = '"+ c4 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC3C5(String classe, String c3, String c5){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC3 = '"
+                    + c3 + "' AND ESP_CARAC5 = '"+ c5 + "';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC3 = '" + c3 +
+                    "' AND ESP_CARAC5 = '"+ c5 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC4C5(String classe, String c4, String c5){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC4 = '"
+                    + c4 + "' AND ESP_CARAC5 = '"+ c5 + "';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC4 = '" + c4 +
+                    "' AND ESP_CARAC5 = '"+ c5 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC2C3C4(String classe, String c2, String c3, String c4){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '"
+                    + c2 + "' AND ESP_CARAC3 = '"+ c3 + "' AND ESP_CARAC4 = '" + c4 +"';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '" + c2 +
+                    "' AND ESP_CARAC3 = '"+ c3 + "' AND ESP_CARAC4 = '" + c4 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC2C3C5(String classe, String c2, String c3, String c5){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '"
+                    + c2 + "' AND ESP_CARAC3 = '"+ c3 + "' AND ESP_CARAC5 = '" + c5 +"';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '" + c2 +
+                    "' AND ESP_CARAC3 = '"+ c3 + "' AND ESP_CARAC5 = '" + c5 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC2C4C5(String classe, String c2, String c4, String c5){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '"
+                    + c2 + "' AND ESP_CARAC4 = '"+ c4 + "' AND ESP_CARAC5 = '" + c5 +"';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '" + c2 +
+                    "' AND ESP_CARAC4 = '"+ c4 + "' AND ESP_CARAC5 = '" + c5 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC3C4C5(String classe, String c3, String c4, String c5){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC3 = '"
+                    + c3 + "' AND ESP_CARAC4 = '"+ c4 + "' AND ESP_CARAC5 = '" + c5 +"';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC3 = '" + c3 +
+                    "' AND ESP_CARAC4 = '"+ c4 + "' AND ESP_CARAC5 = '" + c5 + "';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
+    public List<Especie> getByC2C3C4C5(String classe, String c2, String c3, String c4, String c5){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        try {
+            Log.d(TAG, "valor de classe: " + classe);
+            Log.d(TAG, "tamanho do cursor: " + sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '" + c2 +
+                    "' AND ESP_CARAC3 = '"+ c3 + "' AND ESP_CARAC4 = '" + c4 + "' AND ESP_CARAC5 = '"+ c5 +"';",null).getCount());
+            return  toList(sqLiteDatabase.rawQuery("SELECT * FROM ESPECIE WHERE ESP_CLASSE = '" + classe + "' AND ESP_CARAC2 = '" + c2 +
+                    "' AND ESP_CARAC3 = '"+ c3 + "' AND ESP_CARAC4 = '" + c4 + "' AND ESP_CARAC5 = '"+ c5 +"';",null));
+        }finally {
+            sqLiteDatabase.close();
+        }
+    }
     private List<Especie> toList(Cursor c){
         List<Especie> especies = new ArrayList<>();
         if(c.moveToFirst()){
             do{
                 Especie especie = new Especie();
-                especie.id = c.getLong(c.getColumnIndex("_ESP_ID"));
+                especie.id = c.getInt(c.getColumnIndex("_id"));
                 especie.nome = c.getString(c.getColumnIndex("ESP_NOME"));
                 especie.caracteristicas = c.getString(c.getColumnIndex("ESP_CARACT"));
                 especie.habitos = c.getString(c.getColumnIndex("ESP_HABITOS"));
@@ -97,11 +274,10 @@ public class EspecieDAO extends SQLiteOpenHelper {
                 especie.caracter3 = c.getString(c.getColumnIndex("ESP_CARAC3"));
                 especie.caracter4 = c.getString(c.getColumnIndex("ESP_CARAC4"));
                 especie.caracter5 = c.getString(c.getColumnIndex("ESP_CARAC5"));
-                especie.caracter6 = c.getString(c.getColumnIndex("ESP_CARAC6"));
                 especie.filo = c.getString(c.getColumnIndex("ESP_FILO"));
                 especie.ordem = c.getString(c.getColumnIndex("ESP_ORDEM"));
                 especie.classe = c.getString(c.getColumnIndex("ESP_CLASSE"));
-                especie.genero = c.getString(c.getColumnIndex("ESP_GENERO"));
+                especie.familia = c.getString(c.getColumnIndex("ESP_FAMILIA"));
                 especie.especie = c.getString(c.getColumnIndex("ESP_ESP"));
                 especie.img1 = c.getBlob(c.getColumnIndex("ESP_FOTOP"));
                 especie.img2 = c.getBlob(c.getColumnIndex("ESP_FOTOG"));

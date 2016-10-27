@@ -36,6 +36,10 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
     private EspecieDAO especieDAO;
     private SearchFragment searchFragment;
     private Bundle args;
+    public String classe;
+    private EspecieAdapter adapter;
+
+
 
     public ListFragment() {
         super();
@@ -56,8 +60,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_list,container,false);
        // args = getArguments();
-        MainActivity mainActivity = (MainActivity)getActivity();
-        ((MainActivity)getActivity()).getSupportActionBar().setTitle(mainActivity.filo);
+        ((MainActivity)getActivity()).getSupportActionBar().setTitle(classe);
         recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         linearLayoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -96,27 +99,27 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.menu_list,menu);
-        //SearchView searchView = (SearchView) menu.findItem(R.id.menuitem_pesquisar).getActionView();
-        SearchView sv = (SearchView) menu.findItem(R.id.menuitem_pesquisar).getActionView();
+        SearchView searchView = (SearchView) menu.findItem(R.id.menuitem_pesquisar).getActionView();
 
-        sv.setQueryHint("Nome da espécie");
-        sv.setOnQueryTextListener(this);
+        searchView.setQueryHint("Nome da espécie");
+        searchView.setOnQueryTextListener(this);
+
     }
     @Override
     public boolean onQueryTextSubmit(String query) {
         //toast("Ao pressionar enter.");
         return true;
     }
-
+    //ver alguma forma  de fazer a pesquisa ser case insentive
     @Override
     public boolean onQueryTextChange(String newText) {
-        List<Especie> especieList = new ArrayList<>(); //uma lista para nova camada de modelo da RecyclerView
-
-        for(Especie especie : especies){ //um for-each na lista de especies
-            if(especie.nome.contains(newText)) { //se o nome da especie contém o texto digitado
+       List<Especie> especieList = new ArrayList<>(); //uma lista para nova camada de modelo da RecyclerView
+        especieList = especieDAO.getByNome(classe,newText);
+        /*for(Especie especie : especies){ //um for-each na lista de especies
+            if(especie.nome.startsWith(newText)) { //se o nome da especie contém o texto digitado
                 especieList.add(especie); //adiciona a especie na nova lista
             }
-        }
+        }*/
         //Context, fonte de dados, tratador do evento onClick
         recyclerView.setAdapter(new EspecieAdapter(getContext(), especieList, onClickEspecie()));
 
@@ -138,7 +141,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
                 //Prepara o fragment que será inflado
                 EspecieFragment especieFragment = new EspecieFragment();
                 Bundle args = new Bundle();
-                args.putSerializable("ESPÉCIE", especies.get(idx));
+                args.putSerializable("ESPECIE", especies.get(idx));
                 especieFragment.setArguments(args);
                 transaction.replace(R.id.fragment_container, especieFragment).addToBackStack(null).commit();
             }
@@ -156,7 +159,7 @@ public class ListFragment extends Fragment implements SearchView.OnQueryTextList
         protected List<Especie> doInBackground(Void... voids) {
             //busca os carros em background, em uma thread exclusiva para esta tarefa.
             MainActivity mainActivity = (MainActivity)getActivity();
-                return especieDAO.getByFilo(mainActivity.filo);
+                return especieDAO.getByClasse(classe);
         }
 
         @Override

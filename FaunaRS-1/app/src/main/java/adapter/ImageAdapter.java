@@ -1,25 +1,31 @@
 package adapter;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+
+import java.util.List;
+
+import model.Galeria;
 
 /**
  * Created by gomes on 22/04/2016.
  */
 public class ImageAdapter extends BaseAdapter {
     private Context context;
-    private final int[] imagens;
+    private Galeria galeria;
+    private List<Galeria> galeriaList;
 
-    public ImageAdapter(Context c, int[] imagens){
+    public ImageAdapter(Context c, List<Galeria> galerias){
         this.context = c;
-        this.imagens = imagens;
+        this.galeriaList = galerias;
     }
     @Override
     public int getCount() {
-        return imagens.length;
+        return galeriaList.size();
     }
 
     @Override
@@ -34,8 +40,9 @@ public class ImageAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        galeria = galeriaList.get(position);
         ImageView img = new ImageView(context);
-        img.setImageResource(imagens[position]);
+        img.setImageBitmap(BitmapFactory.decodeByteArray(galeria.imagem,0,galeria.imagem.length));
         img.setAdjustViewBounds(true);
         //img.setLayoutParams(params);
         return img;

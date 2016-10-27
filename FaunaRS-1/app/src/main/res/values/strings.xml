@@ -17,5 +17,29 @@
     <string name="title_result_fragment">Resultado</string>
     <string name="title_main">Fauna RS</string>
     <string name="title_gallery">Galeria</string>
-
+    <string name="txtc2_peixes_identify">Tamanho:</string>
+    <string name="txtc3_peixes_identify">Tipo de água:</string>
+    <string name="txtc4_peixes_identify">Alimentação:</string>
+    <string name="txtc5_peixes_identify">Cor predominante:</string>
+    <string name="txtc2_anfi_identify">Ordem:</string>
+    <string name="txtc3_anfi_identify">Habitat:</string>
+    <string name="txtc4_anfi_identify">Tamanho:</string>
+    <string name="txtc5_anfi_identify">Cor predominante:</string>
+    <string name="txtc2_rept_identify">Tipo:</string>
+    <string name="txtc3_rept_identify">Habitat:</string>
+    <string name="txtc4_rept_identify">Alimentação:</string>
+    <string name="txtc5_rept_identify">Tamanho:</string>
+    <string name="txtc2_aves_identify">Porte:</string>
+    <string name="txtc3_aves_identify">Formato do bico:</string>
+    <string name="txtc4_aves_identify">Cor predominante:</string>
+    <string name="txtc5_aves_identify">Habitat</string>
+    <string name="txtc2_mamif_identify">Ordem:</string>
+    <string name="txtc3_mamif_identify">Habitat:</string>
+    <string name="txtc4_mamif_identify">Alimentação:</string>
+    <string name="txtc5_mamif_identify">Porte:</string>
+    <string name="txtclasse_identify">Classe:</string>
+    <string name="txt_desc_result">Clique  para abrir a ficha do animal ou mantenha pressionado para adicionar a foto na galeria da especie</string>
+    <string name="permision_available_camera">Camera Permission has been granted. Camera app can now be opened.</string>
+    <string name="permissions_not_granted">Permissions were not granted.</string>
+    <string name="permission_camera_rationale">Camera permission is needed to show the camera app.</string>
 </resources>

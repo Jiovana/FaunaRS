@@ -3,88 +3,80 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:background="#00ffffff"
+    android:foreground="#00ffffff">
 
 
-
-    <android.support.v7.widget.CardView
-        android:id="@+id/cardview_search"
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="6dp"
-        android:clickable="true"
-        card_view:background="@drawable/background">
+        android:background="@drawable/background"
+        android:foreground="#00ffffff">
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Escolha uma classe"
+        android:id="@+id/textView"
+        android:textSize="40dp"
+        android:textColor="@color/abc_background_cache_hint_selector_material_light"
+        android:textAlignment="center"
+        android:foreground="#00ffffff"
+        android:foregroundTint="#ffffff" />
 
-        <TextView
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center">
+
+        <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Escolha uma filo"
-            android:id="@+id/textView"
-            android:textSize="40dp"
-            android:textColor="@color/abc_background_cache_hint_selector_material_light"
-            android:textAlignment="center"
-            android:foreground="#00ffffff"
-            android:foregroundTint="#ffffff" />
+            android:text="Peixes"
+            android:id="@+id/btnP"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:onClick="onClickPeixes"/>
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="235dp"
+        <Button
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center">
+            android:text="Anfíbios"
+            android:id="@+id/btnAn"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:onClick="onClickAnfibios"/>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Peixes"
-                android:id="@+id/btnP"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:onClick="onClickPeixes"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Répteis"
+            android:id="@+id/btnR"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:onClick="onClickRepteis"/>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Anfíbios"
-                android:id="@+id/btnAn"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:onClick="onClickAnfibios"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Aves"
+            android:id="@+id/btnAv"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:onClick="onClickAves"/>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Répteis"
-                android:id="@+id/btnR"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:onClick="onClickRepteis"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Mamíferos"
+            android:id="@+id/btnM"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:onClick="onClickMamiferos"/>
+    </LinearLayout>
 
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Aves"
-                android:id="@+id/btnAv"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:onClick="onClickAves"/>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Mamíferos"
-                android:id="@+id/btnM"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="10dp"
-                android:onClick="onClickMamiferos"/>
-        </LinearLayout>
-
-        </FrameLayout>
-    </android.support.v7.widget.CardView>
+    </FrameLayout>
 
 </FrameLayout>

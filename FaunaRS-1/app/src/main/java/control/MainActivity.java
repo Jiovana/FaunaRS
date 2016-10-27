@@ -25,24 +25,20 @@ import com.example.gomes.faunars_1.R;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private Button btnIdentificar;
-    private Button btnPesquisar;
-    private ImageView img;
-    private IdentifyFragment identifyFragment;
-    private SearchFragment searchFragment;
     private MediaPlayer player;
     private LinearLayout layout;
     private View view;
-    public String filo;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        btnIdentificar = (Button) findViewById(R.id.btnIdentificar);
-        btnPesquisar = (Button) findViewById(R.id.btnPesquisar);
-        img = (ImageView) findViewById(R.id.img_main);
-        layout = (LinearLayout) findViewById(R.id.layout_main_button);
+
+        MainFragment mainFragment = new MainFragment();
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, mainFragment, "mainFragment").addToBackStack("mainFragment").commit(); //adiciona o fragmento ao content_main.xml
+
 
         player = MediaPlayer.create(getApplicationContext(),R.raw.mus_vsasgore);
         player.start();
@@ -60,11 +56,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-        layout.setVisibility(view.VISIBLE);
-        btnIdentificar.setVisibility(view.VISIBLE);
-        btnPesquisar.setVisibility(view.VISIBLE);
-        img.setVisibility(view.VISIBLE);
-
 
     }
     /**
@@ -73,29 +64,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public void onDestroy(){
         super.onDestroy();
-       //livroDAO.close(); //fecha a conexao com o banco de dados
     }
 
-    public void onClickIdentificar(View v) {
-        btnIdentificar.setVisibility(v.INVISIBLE);
-        btnPesquisar.setVisibility(v.INVISIBLE);
-        img.setVisibility(v.INVISIBLE);
-        layout.setVisibility(v.INVISIBLE);
-        identifyFragment = new IdentifyFragment(); //cria o fragmento
-        //adição de Fragmentos em tempo de execução
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, identifyFragment, "identifyFragment").addToBackStack("identifyFragment").commit(); //adiciona o fragmento ao content_main.xml
-    }
-    public void onClickPesquisar(View v){
-        btnIdentificar.setVisibility(v.INVISIBLE);
-        btnPesquisar.setVisibility(v.INVISIBLE);
-        img.setVisibility(v.INVISIBLE);
-        layout.setVisibility(v.INVISIBLE);
-        searchFragment = new SearchFragment(); //cria o fragmento
-        //adição de Fragmentos em tempo de execução
-        getSupportFragmentManager().beginTransaction()
-                .add(R.id.fragment_container, searchFragment, "searchFragment").addToBackStack("searchFragment").commit(); //adiciona o fragmento ao content_main.xml
-    }
     /*----------------------------------
 
 	Criação e tratamento de eventos da ActionBar

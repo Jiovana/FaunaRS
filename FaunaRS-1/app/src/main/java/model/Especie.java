@@ -9,9 +9,9 @@ public class Especie implements Serializable{
     public static final long serialVersionUID = 1L;
     public String nome;//nome comum
     public String caracter2, caracter3, caracter4, caracter5, caracter6;
-    public Long id;
+    public Integer id;
     public String caracteristicas, habitos, localizacao;
-    public String filo, classe, ordem, genero, especie;//especie = nome cientifico
+    public String filo, classe, ordem, familia, especie;//especie = nome cientifico
     public byte[] img1, img2;
 
 
@@ -31,10 +31,10 @@ public class Especie implements Serializable{
                 + ", caracter4='" + caracter4 + '\''
                 + ", caracter5='" + caracter5 + '\''
                 + ", caracter6='" + caracter6 + '\''
-                + ", filo='" + filo + '\''
+                + ", classe='" + filo + '\''
                 + ", classe='" + classe + '\''
                 + ", ordem='" + ordem + '\''
-                + ", gênero='" + genero + '\''
+                + ", família='" + familia + '\''
                 + ", espécie='" + especie + '\''
                 + '}';
     }

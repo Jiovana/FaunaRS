@@ -8,7 +8,7 @@ import java.util.Arrays;
  */
 public class Galeria implements Serializable{
     public static final long serialVersionUID = 1L;
-    public Long gal_id, esp_id;
+    public Integer gal_id, esp_id;
     public byte[] imagem;
 
     public Galeria() {

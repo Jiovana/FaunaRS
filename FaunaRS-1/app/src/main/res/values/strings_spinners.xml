@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="caract1_classes">
+        <item>Selecione</item>
+        <item>Peixes</item>
+        <item>Anfíbios</item>
+        <item>Répteis</item>
+        <item>Aves</item>
+        <item>Mamíferos</item>
+    </string-array>
+    <string-array name="caract2_peixes_tamanho">
+        <item>Não sei</item>
+        <item>Pequeno(até 1kg)</item>
+        <item>Médio(até 5kg)</item>
+        <item>Grande(> 5kg)</item>
+    </string-array>
+    <string-array name="caract2_anfíbios_ordem">
+        <item>Não sei</item>
+        <item>Urodela(salamandras)</item>
+        <item>Anura(sapos)</item>
+        <item>Gymnophiona(cobras-cegas)</item>
+    </string-array>
+    <string-array name="caract2_repteis_tipo">
+        <item>Não sei</item>
+        <item>Lagartos</item>
+        <item>Cobras</item>
+        <item>Quelônios</item>
+        <item>Crocodilianos</item>
+    </string-array>
+    <string-array name="caract2_aves_porte">
+        <item>Não sei</item>
+        <item>Pequeno</item>
+        <item>Médio</item>
+        <item>Grande</item>
+    </string-array>
+    <string-array name="caract2_mamiferos_ordem">
+        <item>Não sei</item>
+        <item>Artiodactyla(Ungulados c/ dedos pares)</item>
+        <item>Carnívoros</item>
+        <item>Cetáceos</item>
+        <item>Chiroptera(morcegos)</item>
+        <item>Cingulata(tatus)</item>
+        <item>Didelphimorphia(gambás)</item>
+        <item>Erinaceomorpha(ouriços)</item>
+        <item>Lagomorpha(coelhos)</item>
+        <item>Perissodactyla(Ungulados c/ dedos ímpares)</item>
+        <item>Pilosa(tamanduás)</item>
+        <item>Primatas</item>
+        <item>Roedores</item>
+        <item>Soricomorpha(toupeiras)</item>
+    </string-array>
+    <string-array name="caract3_peixes_agua">
+        <item>Não sei</item>
+        <item>Água doce</item>
+        <item>Água salgada</item>
+        <item>Água salobra</item>
+    </string-array>
+    <string-array name="caract3_anfibios_local">
+        <item>Não sei</item>
+        <item>Floresta</item>
+        <item>Campo</item>
+        <item>Pântano</item>
+        <item>Cidade</item>
+        <item>Litoral</item>
+    </string-array>
+    <string-array name="caract3_repteis_local">
+        <item>Não sei</item>
+        <item>Floresta</item>
+        <item>Campo</item>
+        <item>Pântano</item>
+        <item>Cidade</item>
+        <item>Litoral</item>
+    </string-array>
+    <string-array name="caract3_aves_bico">
+        <item>Não sei</item>
+        <item>Generalista</item>
+        <item>Insetívoro</item>
+        <item>Granívoro</item>
+        <item>Frugívoro</item>
+        <item>Nectívoro</item>
+        <item>Pescador</item>
+        <item>Raptorial</item>
+        <item>Necrófago</item>
+        <item>Mergulhador</item>
+        <item>Insetos em troncos</item>
+        <item>Limícola</item>
+        <item>Filtrador</item>
+        <item>Sondador</item>
+        <item>Em tesoura</item>
+        <item>Rede de pesca</item>
+        <item></item>
+    </string-array>
+    <string-array name="caract3_mamiferos_local">
+        <item>Não sei</item>
+        <item>Floresta</item>
+        <item>Campo</item>
+        <item>Pântano</item>
+        <item>Cidade</item>
+        <item>Litoral</item>
+    </string-array>
+    <string-array name="caract4_peixes_comida">
+        <item>Não sei</item>
+        <item>Carnívoro</item>
+        <item>Herbívoro</item>
+        <item>Onívoro</item>
+    </string-array>
+    <string-array name="caract4_anfibios_tamanho">
+        <item>Não sei</item>
+        <item>Pequeno(até 5cm)</item>
+        <item>Médio(5 a 10cm)</item>
+        <item>Grande(> 10cm)</item>
+    </string-array>
+    <string-array name="caract4_repteis_comida">
+        <item>Não sei</item>
+        <item>Carnívoro</item>
+        <item>Herbívoro</item>
+        <item>Onívoro</item>
+        <item>Insetívoro</item>
+    </string-array>
+    <string-array name="caract4_aves_cor">
+        <item>Não sei</item>
+        <item>Marrom</item>
+        <item>Amarelo</item>
+        <item>Preto</item>
+        <item>Bege</item>
+        <item>Branco</item>
+        <item>Azul claro</item>
+        <item>Azul escuro</item>
+        <item>Verde</item>
+        <item>Vermelho</item>
+        <item>Cinza</item>
+        <item>Roxo</item>
+        <item>Colorido</item>
+    </string-array>
+    <string-array name="caract4_mamiferos_comida">
+        <item>Não sei</item>
+        <item>Carne</item>
+        <item>Vegetais</item>
+        <item>De tudo</item>
+        <item>Insetos</item>
+    </string-array>
+    <string-array name="caract5_peixes_coloração">
+        <item>Não sei</item>
+        <item>Cinza</item>
+        <item>Preto</item>
+        <item>Marrom</item>
+        <item>Azul</item>
+        <item>Verde</item>
+        <item>Duas cores</item>
+        <item>Colorido</item>
+    </string-array>
+    <string-array name="caract5_anfibios_cor">
+        <item>Não sei</item>
+        <item>Preto</item>
+        <item>Azul</item>
+        <item>Verde</item>
+        <item>Amarelo</item>
+        <item>Vermelho</item>
+        <item>Marrom</item>
+        <item>Cinza</item>
+        <item>Branco</item>
+        <item>Duas cores</item>
+        <item>Colorido</item>
+    </string-array>
+    <string-array name="caract5_repteis_tamanho">
+        <item>Não sei</item>
+        <item>Pequeno(até 30cm)</item>
+        <item>Médio(30cm a 1m)</item>
+        <item>Grande(> 1m)</item>
+        <item></item>
+    </string-array>
+    <string-array name="caract5_aves_local">
+        <item>Não sei</item>
+        <item>Floresta</item>
+        <item>Campo</item>
+        <item>Pântano</item>
+        <item>Cidade</item>
+        <item>Litoral</item>
+    </string-array>
+    <string-array name="caract5_mamiferos_porte">
+        <item>Não sei</item>
+        <item>Pequeno (até 50kg) </item>
+        <item>Médio (até 100kg)</item>
+        <item>Grande (>100kg)</item>
+    </string-array>
+
+</resources>

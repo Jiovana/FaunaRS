@@ -1,18 +1,17 @@
 package control;
 
-import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.gomes.faunars_1.R;
 
@@ -25,14 +24,16 @@ public class EspecieFragment extends android.support.v4.app.Fragment {
     private Especie especie;
     private TextView txttitulo;
     private TextView txtfilo;
-    private TextView txtordem;
     private TextView txtclasse;
-    private TextView txtgenero;
+    private TextView txtordem;
+    private TextView txtfamilia;
     private TextView txtespecie;
     private TextView txtcaracteristica;
     private TextView txthabitos;
     private TextView txtlocalizacao;
     private ImageView imggrande;
+    private Button btnG;
+    private GalleryActivity galleryActivity;
 
 
     public EspecieFragment() {
@@ -56,8 +57,10 @@ public class EspecieFragment extends android.support.v4.app.Fragment {
         //infla o layout
         View view = inflater.inflate(R.layout.fragment_especie, container, false);
 
+        especie = (Especie) getArguments().get("ESPECIE");
+
         //um título para a janela
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Detalhes da espécie:");
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Detalhes da espécie");
 
         //titulo
         txttitulo = (TextView) view.findViewById(R.id.txt_titulo_esp);
@@ -65,18 +68,18 @@ public class EspecieFragment extends android.support.v4.app.Fragment {
 
         //imagem
         imggrande = (ImageView) view.findViewById(R.id.img_esp);
-        imggrande.setImageBitmap(BitmapFactory.decodeByteArray(especie.img1,0,especie.img1.length));
+        imggrande.setImageBitmap(BitmapFactory.decodeByteArray(especie.img2, 0, especie.img2.length));
 
         //taxonomia
         txtfilo = (TextView) view.findViewById(R.id.txt_filo_esp);
         txtordem = (TextView) view.findViewById(R.id.txt_ord_esp);
-        txtclasse = (TextView) view.findViewById(R.id.txt_clas_esp);
-        txtgenero = (TextView) view.findViewById(R.id.txt_gen_esp);
+        txtclasse = (TextView) view.findViewById(R.id.txt_class_esp);
+        txtfamilia = (TextView) view.findViewById(R.id.txt_fam_esp);
         txtespecie = (TextView) view.findViewById(R.id.txt_esp_esp);
         txtfilo.setText(especie.filo);
         txtordem.setText(especie.ordem);
         txtclasse.setText(especie.classe);
-        txtgenero.setText(especie.genero);
+        txtfamilia.setText(especie.familia);
         txtespecie.setText(especie.especie);
 
         //caracteristicas, habitos e localização
@@ -87,6 +90,17 @@ public class EspecieFragment extends android.support.v4.app.Fragment {
         txthabitos.setText(especie.habitos);
         txtlocalizacao.setText(especie.localizacao);
 
+        //botão da galeria
+        btnG = (Button) view.findViewById(R.id.btn_gal_esp);
+        btnG.setOnClickListener((new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getContext(), GalleryActivity.class);
+                        intent.putExtra("id_especie", especie.id);
+                        startActivity(intent);
+                    }
+                })
+        );
         return view;
     }
 
@@ -95,8 +109,5 @@ public class EspecieFragment extends android.support.v4.app.Fragment {
         super.onCreateOptionsMenu(menu, inflater);
     }
 
-    public void onClickGaleria(){
-        Toast.makeText(getContext(),"Em construção", Toast.LENGTH_SHORT).show();
 
-    }
 }

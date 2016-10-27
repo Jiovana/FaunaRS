@@ -2,6 +2,7 @@ package adapter;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,12 +30,14 @@ public class EspecieAdapter extends RecyclerView.Adapter<EspecieAdapter.Especies
     private final List<Especie> especies;
     private final Context context;
 
+
     private EspecieOnClickListener especieOnClickListener;
 
     public EspecieAdapter(Context context, List<Especie> especies, EspecieOnClickListener especieOnClickListener) {
         this.context = context;
         this.especies = especies;
         this.especieOnClickListener = especieOnClickListener;
+
     }
 
     @Override
@@ -59,18 +62,9 @@ public class EspecieAdapter extends RecyclerView.Adapter<EspecieAdapter.Especies
 
         holder.txtNome.setText(e.nome);
         holder.txtNomeC.setText(e.especie);
-        holder.progress.setVisibility(View.VISIBLE);
+        //holder.progress.setVisibility(View.VISIBLE);
+        holder.imgP.setImageBitmap(BitmapFactory.decodeByteArray(e.img1, 0, e.img1.length));
 
-        Picasso.with(context).load(String.valueOf(e.img2)).fit().into(holder.imgP, new Callback() { //ajuda professor ver o tipo de imagem pra puxar do banco, a variavel tá em bytes
-            @Override
-            public void onSuccess() {
-                holder.progress.setVisibility(View.GONE);
-            }
-            @Override
-            public void onError() {
-                holder.progress.setVisibility(View.GONE);
-            }
-        });
         // Click
         if (especieOnClickListener != null) {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -83,14 +77,14 @@ public class EspecieAdapter extends RecyclerView.Adapter<EspecieAdapter.Especies
     }
 
     public interface EspecieOnClickListener {
-         void onClickEspecie(View view, int idx);
+        void onClickEspecie(View view, int idx);
     }
 
     // ViewHolder com as views
     public static class EspeciesViewHolder extends RecyclerView.ViewHolder {
         public TextView txtNome, txtNomeC;
-        ImageView imgP;
-        ProgressBar progress;
+        public ImageView imgP;
+        public ProgressBar progress;
 
         public EspeciesViewHolder(View view) {
             super(view);

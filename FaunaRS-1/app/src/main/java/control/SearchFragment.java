@@ -32,18 +32,19 @@ public class SearchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         especieDAO = EspecieDAO.getInstance(getContext());
+        listFragment = new ListFragment();
     }
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_search_fragment);  //um título para a janela
-        final MainActivity mainActivity = (MainActivity)getActivity();
+
 
         btnP = (Button) view.findViewById(R.id.btnP);
         btnP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.filo = ("PEIXES");
+                listFragment.classe = ("Peixes");
                 replaceFragment();
             }
         });
@@ -51,7 +52,7 @@ public class SearchFragment extends Fragment {
         btnAn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.filo = ("ANFÍBIOS");
+                listFragment.classe = ("Amphibia");
                 replaceFragment();
             }
         });
@@ -59,7 +60,7 @@ public class SearchFragment extends Fragment {
         btnR.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.filo = ("REPTILIA");
+                listFragment.classe = ("Reptilia");
                 replaceFragment();
             }
         });
@@ -67,7 +68,7 @@ public class SearchFragment extends Fragment {
         btnAv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.filo = ("AVES");
+                listFragment.classe = ("Aves");
                 replaceFragment();
             }
         });
@@ -75,7 +76,7 @@ public class SearchFragment extends Fragment {
         btnM.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mainActivity.filo = ("MAMMALIA");
+                listFragment.classe = ("Mammalia");
                 replaceFragment();
             }
         });
@@ -101,9 +102,6 @@ public class SearchFragment extends Fragment {
     private void replaceFragment() {
        // Bundle args = new Bundle();
         //args.putString("Filo",searchFragment.getFilo());
-
-        ListFragment listFragment = new ListFragment();
-        //listFragment.setArguments(args);
 
         FragmentTransaction transaction = getActivity().getSupportFragmentManager().beginTransaction();
         //Prepara o fragment que será inflado

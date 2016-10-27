@@ -1,28 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:weightSum="1"
     android:background="@drawable/background">
 
-    <android.support.v7.widget.CardView
-        android:layout_width="341dp"
-        android:layout_height="131dp"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical" android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:weightSum="1"
+            android:id="@+id/layout_identify">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tire uma foto do animal..."
+                android:id="@+id/textView4"
+                android:textSize="22sp"
+                android:textColor="#ffffff"
+                android:textAlignment="inherit"
+                android:layout_gravity="center" />
+
+            <android.support.v7.widget.CardView
+        android:layout_width="348dp"
+        android:layout_height="205dp"
         android:id="@+id/view"
-        android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10">
+        android:layout_gravity="center_horizontal">
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.10">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="clique para tirar uma foto"
-            android:id="@+id/button9"
-            android:layout_gravity="center" />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/img_identify"
+            android:src="@drawable/foto_sombra" />
+
+        <ImageButton
+            android:layout_width="65dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:id="@+id/btnfoto_identify"
+            android:src="@android:drawable/ic_menu_camera" />
     </FrameLayout>
 
     </android.support.v7.widget.CardView>
@@ -30,191 +55,158 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="selecione as opções abaixo:"
+        android:text="...e selecione as opções abaixo:"
         android:id="@+id/textView22"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.10"
-        android:textSize="25dp"
-        android:textColor="#ffffff" />
+        android:textSize="22dp"
+        android:textColor="#ffffff"
+        android:layout_marginTop="10dp" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/txtclasse_identify"
+            android:id="@+id/txt_identify_classe"
+            android:textSize="20sp"
+            android:textColor="#ffffff"
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal" />
+
+        <Spinner
+            android:layout_width="145dp"
+            android:layout_height="40dp"
+            android:id="@+id/spinner_classe_identify"
+            android:layout_marginTop="10dp"
+            android:spinnerMode="dialog"
+            android:layout_gravity="center_horizontal"
+            android:background="#757575"
+            android:foreground="#00000000" />
+    </LinearLayout>
 
     <GridLayout
-        android:layout_width="358dp"
-        android:layout_height="286dp"
+        android:layout_width="wrap_content"
+        android:layout_height="170dp"
         android:layout_gravity="center_horizontal"
-        android:columnCount="4"
-        android:rowCount="6"
+        android:columnCount="2"
+        android:rowCount="4"
         android:columnOrderPreserved="true">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="caract4"
-            android:id="@+id/txt4"
+            android:text="Característica 2"
+            android:id="@+id/txt_identify_c4"
             android:layout_row="0"
-            android:layout_column="2"
+            android:layout_column="1"
             android:textSize="20dp"
             android:textColor="#ffffff"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="60dp" />
 
         <Spinner
-            android:layout_width="146dp"
+            android:layout_width="145dp"
             android:layout_height="40dp"
-            android:id="@+id/spinner"
+            android:id="@+id/spinner_caract2_identify"
             android:layout_row="1"
             android:layout_column="0"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:layout_margin="0dp"
+            android:spinnerMode="dialog"
+            android:background="#757575" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="filo"
-            android:id="@+id/txt1"
+            android:text="Característica 1"
+            android:id="@+id/txt_identify_c2"
             android:layout_row="0"
             android:layout_column="0"
             android:textSize="20dp"
             android:textColor="#ffffff"
-            android:layout_marginTop="5dp" />
-
-        <ImageButton
-            android:layout_width="37dp"
-            android:layout_height="31dp"
-            android:id="@+id/imageButton"
-            android:layout_row="1"
-            android:layout_column="1"
-            android:layout_marginTop="5dp" />
-
-        <ImageButton
-            android:layout_width="37dp"
-            android:layout_height="31dp"
-            android:id="@+id/imageButton2"
-            android:layout_row="3"
-            android:layout_column="1"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal" />
 
         <Spinner
-            android:layout_width="150dp"
+            android:layout_width="145dp"
             android:layout_height="40dp"
-            android:id="@+id/spinner2"
+            android:id="@+id/spinner_caract3_idenfity"
             android:layout_row="3"
             android:layout_column="0"
-            android:layout_marginTop="10dp" />
+            android:layout_marginTop="10dp"
+            android:spinnerMode="dialog"
+            android:background="#757575" />
 
         <Spinner
-            android:layout_width="131dp"
+            android:layout_width="145dp"
             android:layout_height="38dp"
-            android:id="@+id/spinner4"
+            android:id="@+id/spinner_caract4_identify"
             android:layout_row="1"
-            android:layout_column="2"
-            android:layout_marginTop="10dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="local"
-            android:id="@+id/txt5"
-            android:layout_row="2"
-            android:layout_column="2"
-            android:textSize="20dp"
-            android:textColor="#ffffff"
-            android:layout_marginTop="5dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="tamanho"
-            android:id="@+id/txt2"
-            android:layout_row="2"
-            android:layout_column="0"
-            android:textSize="20dp"
-            android:textColor="#ffffff"
-            android:layout_marginTop="5dp" />
-
-        <ImageButton
-            android:layout_width="37dp"
-            android:layout_height="31dp"
-            android:id="@+id/imageButton3"
-            android:layout_row="5"
             android:layout_column="1"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="70dp"
+            android:spinnerMode="dialog"
+            android:background="#757575" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="caract6"
-            android:id="@+id/txt6"
-            android:layout_row="4"
-            android:layout_column="2"
+            android:text="Característica 4"
+            android:id="@+id/txt_identify_c5"
+            android:layout_row="2"
+            android:layout_column="1"
             android:textSize="20dp"
             android:textColor="#ffffff"
-            android:layout_marginTop="5dp" />
-
-        <Spinner
-            android:layout_width="148dp"
-            android:layout_height="42dp"
-            android:id="@+id/spinner3"
-            android:layout_row="5"
-            android:layout_column="0"
-            android:layout_marginTop="10dp" />
-
-        <Spinner
-            android:layout_width="142dp"
-            android:layout_height="40dp"
-            android:id="@+id/spinner5"
-            android:layout_row="5"
-            android:layout_column="2"
-            android:layout_marginTop="10dp" />
-
-        <Spinner
-            android:layout_width="136dp"
-            android:layout_height="40dp"
-            android:id="@+id/spinner6"
-            android:layout_row="3"
-            android:layout_column="2"
-            android:layout_marginTop="10dp" />
-
-        <ImageButton
-            android:layout_width="39dp"
-            android:layout_height="32dp"
-            android:id="@+id/imageButton5"
-            android:layout_row="3"
-            android:layout_column="3"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginLeft="60dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="cor"
-            android:id="@+id/txt3"
-            android:layout_row="4"
+            android:text="Característica 3"
+            android:id="@+id/txt_identify_c3"
+            android:layout_row="2"
             android:layout_column="0"
             android:textSize="20dp"
             android:textColor="#ffffff"
-            android:layout_marginTop="5dp" />
+            android:layout_marginTop="5dp"
+            android:layout_gravity="center_horizontal" />
 
-        <ImageButton
-            android:layout_width="41dp"
-            android:layout_height="34dp"
-            android:id="@+id/imageButton4"
-            android:layout_row="1"
-            android:layout_column="3"
-            android:layout_marginTop="5dp" />
+        <Spinner
+            android:layout_width="145dp"
+            android:layout_height="40dp"
+            android:id="@+id/spinner_caract5_identify"
+            android:layout_row="3"
+            android:layout_column="1"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="70dp"
+            android:spinnerMode="dialog"
+            android:background="#757575" />
 
-        <ImageButton
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:id="@+id/imageButton6"
-            android:layout_row="5"
-            android:layout_column="3"
-            android:layout_marginTop="5dp" />
     </GridLayout>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnhelp_identify"
+        android:layout_gravity="center_horizontal"
+        android:src="@android:drawable/ic_menu_help" />
 
     <Button
         android:layout_width="133dp"
         android:layout_height="wrap_content"
         android:text="identificar"
-        android:id="@+id/button10"
+        android:id="@+id/btn_identify"
         android:layout_gravity="center_horizontal"
         android:layout_weight="0.10" />
 
-
-</LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

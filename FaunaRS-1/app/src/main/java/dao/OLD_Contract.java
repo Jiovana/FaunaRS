@@ -24,10 +24,10 @@ public class OLD_Contract {
         public static final String COLUNA_CARAC2= "carac2";
         public static final String COLUNA_FOTOG = "fotog";
         public static final String COLUNA_FOTOP= "fotop";
-        public static final String COLUNA_FILO = "filo";
+        public static final String COLUNA_FILO = "classe";
         public static final String COLUNA_ORDEM = "ordem";
         public static final String COLUNA_CLASSE = "classe";
-        public static final String COLUNA_GENERO = "genero";
+        public static final String COLUNA_GENERO = "familia";
         public static final String COLUNA_ESP = "esp";
         public static final String COLUNA_CARAC4 = "carac4";
         public static final String COLUNA_CARAC5= "carac5";

@@ -2,8 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="14dp">
-
+    android:padding="14dp"
+    android:background="@drawable/background">
 
 
     <ProgressBar
@@ -11,44 +11,46 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/progressBar_result"
-        android:layout_gravity="center" />
+        android:layout_gravity="center"
+        android:layout_marginBottom="90dp" />
 
     <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="wrap_content"
-        android:layout_height="436dp"
-        android:id="@+id/swinperefrechlayout" >
+        android:layout_height="430dp"
+        android:id="@+id/swiperefrechlayout_result" >
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView_result"
+            android:layout_width="match_parent"
+            android:layout_height="430dp"
+            android:cacheColorHint="@android:color/transparent"
+            android:clipToPadding="false"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:listSelector="@android:color/transparent"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            android:layout_gravity="center_horizontal|top"
+            android:background="#689f38" />
 
     </android.support.v4.widget.SwipeRefreshLayout>
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView_result"
-        android:layout_width="match_parent"
-        android:layout_height="412dp"
-        android:cacheColorHint="@android:color/transparent"
-        android:clipToPadding="false"
-        android:divider="@null"
-        android:dividerHeight="0dp"
-        android:listSelector="@android:color/transparent"
-        android:scrollbarStyle="outsideOverlay"
-        android:scrollbars="vertical"
-        android:layout_gravity="center_horizontal|top" />
 
     <LinearLayout
         android:orientation="vertical"
-        android:layout_width="354dp"
-        android:layout_height="66dp"
-        android:layout_gravity="center_horizontal|bottom"
-        android:weightSum="1">
+        android:layout_width="wrap_content"
+        android:layout_height="132dp"
+        android:layout_gravity="center_horizontal|bottom">
 
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Clique em um animal para abrir sua ficha ou de um clique longo para adicionar imagem na galeria da especie"
+            android:layout_height="109dp"
             android:id="@+id/txt_result"
+            android:textColor="@color/abc_primary_text_disable_only_material_dark"
+            android:textSize="24sp"
             android:layout_gravity="center_horizontal"
-            android:textColor="@color/abc_primary_text_material_light"
-            android:textSize="18dp"
-            android:layout_weight="3.33" />
+            android:layout_marginBottom="50dp"
+            android:gravity="center|center_horizontal"
+            android:text="@string/txt_desc_result" />
     </LinearLayout>
 
 

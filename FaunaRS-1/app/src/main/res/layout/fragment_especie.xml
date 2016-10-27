@@ -2,8 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/background">
+    android:layout_height="match_parent">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -24,13 +23,15 @@
                 card_view:cardBackgroundColor="@color/white"
                 card_view:cardCornerRadius="2dp"
                 card_view:cardElevation="6dp"
-                android:foreground="?attr/selectableItemBackground"
+                android:foreground="#00ffffff"
                 android:textAlignment="center"
-                android:layout_gravity="top|center_horizontal">
+                android:layout_gravity="top|center_horizontal"
+                android:background="#00ffffff">
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.11">
+                    android:layout_weight="0.11"
+                    android:background="#00ffffff">
 
                     <TextView
                         android:layout_width="match_parent"
@@ -85,7 +86,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Filo:"
+                            android:text="Filo - Subfilo:"
                             android:id="@+id/textView6"
                             android:textColor="#000000"
                             android:textSize="18dp" />
@@ -95,13 +96,31 @@
                             android:layout_height="wrap_content"
                             android:text="filo_txt"
                             android:id="@+id/txt_filo_esp"
-                            android:textSize="15dp" />
+                            android:textSize="15dp"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Classe:"
+                            android:id="@+id/textView8"
+                            android:textSize="18dp"
+                            android:textColor="#000000" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="classe_txt"
+                            android:id="@+id/txt_class_esp"
+                            android:textSize="15dp"
+                            android:phoneNumber="false"
+                            android:textColor="#000000" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ordem:"
-                            android:id="@+id/textView8"
+                            android:id="@+id/textView10"
                             android:textSize="18dp"
                             android:textColor="#000000" />
 
@@ -110,27 +129,13 @@
                             android:layout_height="wrap_content"
                             android:text="ordem_txt"
                             android:id="@+id/txt_ord_esp"
-                            android:textSize="15dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Classe:"
-                            android:id="@+id/textView10"
-                            android:textSize="18dp"
+                            android:textSize="15dp"
                             android:textColor="#000000" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="classe_txt"
-                            android:id="@+id/txt_clas_esp"
-                            android:textSize="15dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Gênero:"
+                            android:text="Família:"
                             android:id="@+id/textView12"
                             android:textSize="18dp"
                             android:textColor="#000000" />
@@ -138,9 +143,10 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="genero_txt"
-                            android:id="@+id/txt_gen_esp"
-                            android:textSize="15dp" />
+                            android:text="familia_txt"
+                            android:id="@+id/txt_fam_esp"
+                            android:textSize="15dp"
+                            android:textColor="#000000" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -155,7 +161,8 @@
                             android:layout_height="wrap_content"
                             android:text="especie_txt"
                             android:id="@+id/txt_esp_esp"
-                            android:textSize="15dp" />
+                            android:textSize="15dp"
+                            android:textColor="#000000" />
                     </LinearLayout>
 
                     <FrameLayout
@@ -170,7 +177,7 @@
                             android:id="@+id/img_esp"
                             android:src="@drawable/foto_sombra"
                             android:layout_gravity="left|center_vertical"
-                            />
+                            android:layout_margin="10dp" />
                     </FrameLayout>
 
                 </FrameLayout>
@@ -178,7 +185,7 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/cardview_detalhe_2"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:clickable="false"
                 card_view:cardBackgroundColor="@color/white"
@@ -213,14 +220,15 @@
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:text="caracteristicas_txt"
                             android:id="@+id/txt_carac_esp"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"
+                            android:textColor="#000000" />
                     </LinearLayout>
                 </FrameLayout>
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
                 android:id="@+id/cardview_detalhe_3"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:clickable="false"
                 card_view:cardBackgroundColor="@color/white"
@@ -257,14 +265,15 @@
                             android:text="habitos_txt"
                             android:id="@+id/txt_hab_esp"
                             android:textIsSelectable="true"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"
+                            android:textColor="#000000" />
                     </LinearLayout>
                 </FrameLayout>
             </android.support.v7.widget.CardView>
             <android.support.v7.widget.CardView
                 android:id="@+id/cardview_detalhe_4"
                 android:layout_width="match_parent"
-                android:layout_height="130dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="6dp"
                 android:clickable="false"
                 card_view:cardBackgroundColor="@color/white"
@@ -299,7 +308,8 @@
                             android:text="localizacao_txt"
                             android:id="@+id/txt_loc_esp"
                             android:textIsSelectable="true"
-                            android:textSize="18dp" />
+                            android:textSize="18dp"
+                            android:textColor="#000000" />
 
 
                     </LinearLayout>
@@ -321,7 +331,8 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="0.11">
+                android:layout_weight="0.11"
+                android:background="#00ffffff">
 
                 <Button
                     android:layout_width="wrap_content"
