@@ -1,15 +1,20 @@
 package control;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,7 +33,11 @@ import android.widget.Toast;
 
 import com.example.gomes.faunars_1.R;
 
+import java.io.File;
+
 import dao.EspecieDAO;
+import livroandroid.lib.utils.ImageResizeUtils;
+import livroandroid.lib.utils.SDCardUtils;
 
 public class IdentifyFragment extends android.support.v4.app.Fragment implements AdapterView.OnItemSelectedListener, ActivityCompat.OnRequestPermissionsResultCallback {
 
@@ -49,13 +58,45 @@ public class IdentifyFragment extends android.support.v4.app.Fragment implements
     private TextView txtc5;
     private EspecieDAO especieDAO;
     private ResultFragment resultFragment;
-    private String[] listac;
+    private File file;
 
 
     /**
      * Id to identify a camera permission request.
      */
     private static final int REQUEST_CAMERA = 0;
+    private static final int REQUEST_WRITE_STORAGE = 112;
+
+
+    private void requestWriteStoragePermission() {
+        Log.i(TAG, "STORAGE permission has NOT been granted. Requesting permission.");
+        // BEGIN_INCLUDE(storage_permission_request)
+        if (ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            // Provide an additional rationale to the user if the permission was not granted
+            // and the user would benefit from additional context for the use of the permission.
+            // For example if the user has previously denied the permission.
+            Log.i(TAG,
+                    "Displaying storage permission rationale to provide additional context.");
+            Snackbar.make(layout, R.string.permission_storage_rationale,
+                    Snackbar.LENGTH_INDEFINITE)
+                    .setAction("OK", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            ActivityCompat.requestPermissions(getActivity(),
+                                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                                    REQUEST_WRITE_STORAGE);
+                        }
+                    })
+                    .show();
+        } else {
+            // Camera permission has not been granted yet. Request it directly.
+            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    REQUEST_WRITE_STORAGE);
+        }
+        // END_INCLUDE(storage_permission_request)
+    }
+
 
     private View layout;
 
@@ -99,7 +140,8 @@ public class IdentifyFragment extends android.support.v4.app.Fragment implements
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_CAMERA) {
+        switch (requestCode){
+            case REQUEST_CAMERA:
             // BEGIN_INCLUDE(permission_result)
             // Received permission result for camera permission.
             Log.i(TAG, "Received response for Camera permission request.");
@@ -115,7 +157,15 @@ public class IdentifyFragment extends android.support.v4.app.Fragment implements
                         Snackbar.LENGTH_SHORT).show();
             }
             // END_INCLUDE(permission_result)
-        } else {
+                break;
+            case REQUEST_WRITE_STORAGE:
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e("value", "Permission Granted, Now you can use local drive .");
+                } else {
+                    Log.e("value", "Permission Denied, You cannot use local drive .");
+                }
+                break;
+            default:
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
     }
@@ -130,10 +180,10 @@ public class IdentifyFragment extends android.support.v4.app.Fragment implements
         View view = inflater.inflate(R.layout.fragment_identify, container, false);
         ((MainActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_identify_fragment);  //um título para a janela
 
+
         layout = view.findViewById(R.id.layout_identify);
 
         btnimg = (ImageButton) view.findViewById(R.id.btnfoto_identify);
-        btnhelp = (ImageButton) view.findViewById(R.id.btnhelp_identify);
         btnidentify = (Button) view.findViewById(R.id.btn_identify);
         img = (ImageView) view.findViewById(R.id.img_identify);
 
@@ -219,32 +269,57 @@ public class IdentifyFragment extends android.support.v4.app.Fragment implements
                 // BEGIN_INCLUDE(camera_permission)
                 // Check if the Camera permission is already available.
                 if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA)
-                        != PackageManager.PERMISSION_GRANTED) {
+                        != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(),
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ) {
                     // Camera permission has not been granted.
+                    requestWriteStoragePermission();
                     requestCameraPermission();
+
+
                 } else {
                     // Camera permissions is already available, show the camera.
                     Log.i(TAG,
                             "CAMERA permission has already been granted. Displaying camera.");
+                    file= new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),"foto.jpg");
+                    //file = SDCardUtils.getPrivateFile(getContext(), "foto.jpg", Environment.DIRECTORY_PICTURES);
                     Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    i.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
                     startActivityForResult(i, 0);
                 }
                 // END_INCLUDE(camera_permission)
             }
         });
+        if (savedInstanceState != null) {
+            file = (File) savedInstanceState.getSerializable("file");
+            showImage(file);
+        }
         return view;
+    }
+
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putSerializable("file", file);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (data != null) {
-            Bundle bundle = data.getExtras();
-            if (bundle != null) {
-                Bitmap bitmap = (Bitmap) bundle.get("data");
-                img.setImageBitmap(bitmap);
-                btnimg.setVisibility(View.INVISIBLE);
-            }
+        if (resultCode == getActivity().RESULT_OK && file != null) {
+            showImage(file);
+        }
+    }
+
+    private void showImage(File file) {
+        if (file != null && file.exists()) {
+            Log.d(TAG,"caminho da foto: " + file.getAbsolutePath());
+            int w = img.getWidth();
+            int h = img.getHeight();
+            Bitmap bitmap = ImageResizeUtils.getResizedImage(Uri.fromFile(file), w, h, false);
+            img.setImageBitmap(bitmap);
+            btnimg.setVisibility(View.INVISIBLE);
+
         }
     }
 
@@ -388,27 +463,35 @@ public class IdentifyFragment extends android.support.v4.app.Fragment implements
                 break;
             case R.id.spinner_caract2_identify:
                 if (spnrc2.getSelectedItem().equals("Não sei")) {
+                    Log.d(TAG,"Spinner deve estar com 'não sei' pra ser essa opção true");
                     resultFragment.aux1 = true;
+                }else{
+                    resultFragment.aux1 = false;
                 }
-                Toast.makeText(getContext(), "selecionado:" + spnrc2.getSelectedItem(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.spinner_caract3_idenfity:
                 if (spnrc3.getSelectedItem().equals("Não sei")) {
+                    Log.d(TAG,"Spinner deve estar com 'não sei' pra ser essa opção true");
                     resultFragment.aux2 = true;
+                }else{
+                    resultFragment.aux2 = false;
                 }
-                Toast.makeText(getContext(), "selecionado:" + spnrc3.getSelectedItem(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.spinner_caract4_identify:
                 if (spnrc4.getSelectedItem().equals("Não sei")) {
+                    Log.d(TAG,"Spinner deve estar com 'não sei' pra ser essa opção true");
                     resultFragment.aux3 = true;
+                }else{
+                    resultFragment.aux3 = false;
                 }
-                Toast.makeText(getContext(), "selecionado:" + spnrc4.getSelectedItem(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.spinner_caract5_identify:
                 if (spnrc5.getSelectedItem().equals("Não sei")) {
+                    Log.d(TAG,"Spinner deve estar com 'não sei' pra ser essa opção true");
                     resultFragment.aux4 = true;
+                }else{
+                    resultFragment.aux4 = false;
                 }
-                Toast.makeText(getContext(), "selecionado:" + spnrc5.getSelectedItem(), Toast.LENGTH_SHORT).show();
                 break;
         }
     }

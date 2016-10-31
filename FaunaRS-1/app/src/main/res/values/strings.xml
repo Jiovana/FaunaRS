@@ -39,7 +39,9 @@
     <string name="txtc5_mamif_identify">Porte:</string>
     <string name="txtclasse_identify">Classe:</string>
     <string name="txt_desc_result">Clique  para abrir a ficha do animal ou mantenha pressionado para adicionar a foto na galeria da especie</string>
-    <string name="permision_available_camera">Camera Permission has been granted. Camera app can now be opened.</string>
+    <string name="permision_available_camera">Camera Permission has been granted.</string>
     <string name="permissions_not_granted">Permissions were not granted.</string>
     <string name="permission_camera_rationale">Camera permission is needed to show the camera app.</string>
+    <string name="permision_available_storage">Storage Permission has been granted. Camera app can now be opened.</string>
+    <string name="permission_storage_rationale">Storage permission is needed to show the camera app.</string>
 </resources>
